@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title id="informacijeNaslovTab">Информације</title>
+    <!-- <link rel="stylesheet" href="../style.css"> -->
+    <link rel="stylesheet" href="../style-cleaned.css" />
+    <script src="../centralni_recnik_dodatni.js"></script>
+    <script src="../centralni_recnik.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+</head>
+<body>
+    <div class="site-wrapper">
+    <header>
+        <div class="language-menu">
+        <label for="lang">Језик:</label>
+        <select id="lang">
+            <option value="sr">Српски (ћирилица)</option>
+            <option value="sr-Latn">Srpski (latinica)</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+            <option value="tr">Türkçe</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="hi">हिन्दी</option>
+            <option value="fa">فارسی</option>
+            <option value="ar">العربية</option>
+            <option value="vi">Tiếng Việt</option>
+            <option value="pt">Português</option>
+            <option value="sm">Samoan</option>
+            <option value="mi">Māori</option>
+            <option value="sw">Kiswahili</option>
+            <option value="th">ไทย (Thai)</option>
+        </select>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Željeznička stanica Pljevlja - naslovna.html" id="navNaslovna"></a></li>
+                <li class="dropdown">
+                    <a href="Željeznička stanica Pljevlja - informacije.html" id="navInformacije"></a>
+                    <ul class="dropdown-content">
+                        <li><a href="Željeznička stanica Pljevlja - informacije.html" id="navOpsteInformacije"></a></li>
+                        <li><a href="Željeznička stanica Pljevlja - faq.html" id="navFAQ"></a></li>
+                        <li><a href="Željeznička stanica Pljevlja - istorija.html" id="navIstorija"></a></li>
+                    </ul>
+                    </li>
+                <li><a href="Željeznička stanica Pljevlja - kontakt.html" id="navKontakt"></a></li>
+                <li><a href="Željeznička stanica Pljevlja - vozni red.html" id="navVozniRed"></a></li>
+                <li><a href="Željeznička stanica Pljevlja - galerija.html" id="navGalerija"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1 id="informacijeNaslov"></h1>
+        <ul>
+            <li id="nemaVozova"></li>
+            <li><span id="pretrazi"></span></li>
+            <li><span id="datum"></span></li>
+            <li><span id="polazak"></span></li>
+            <li><span id="dolazak"></span></li>
+            <li><span id="od"></span></li>
+            <li><span id="ka"></span></li>
+            <li><span id="prevoznik"></span></li>
+            <li><span id="tipKarte"></span></li>
+            <li><span id="rezervacija"></span></li>
+            <li><span id="placanje"></span></li>
+            <li><span id="student"></span></li>
+            <li><span id="penzioner"></span></li>
+            <li><span id="cena"></span></li>
+            <li><span id="napomena"></span></li>
+        </ul>
+    </main>
+    <footer class="footer-grid">
+  <div class="footer-col">
+    <h4 id="footerZvanicniLinkovi"></h4>
+    <ul>
+      <li><a href="https://www.zcg-prevoz.me/" target="_blank" rel="noopener" id="footerLinkZCG"></a></li>
+      <li><a href="https://www.zicg.me/" target="_blank" rel="noopener" id="footerLinkZICG"></a></li>
+      <li><a href="https://www.gov.me/" target="_blank" rel="noopener" id="footerLinkVlada"></a></li>
+      <li><a href="https://www.pljevlja.co.me/" target="_blank"id="footerLinkOpština"></a></li>
+      <li><a href="https://www.turizampljevlja.me/" target="_blank" id="footerLinkTOP">  </a></li>
+      <li><a href="https://www.juckpv.me/" target="_blank" id="footerLinkJUCKPV">  </a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 id="footerDrustveneMreze"></h4>
+    <ul class="social-links">
+      <li><a href="#" aria-label="Facebook" id="footerFacebook"><img src="../images/icons8-facebook-50.svg" alt="Facebook" style="width:20px;height:20px;"><span></span></a></a></li>
+      <li><a href="#" aria-label="Instagram" id="footerInstagram"><img src="../images/icons8-instagram-50.svg" alt="Instagram" style="width:20px;height:20px;"><span></span></a></a></li>
+      <li><a href="#" aria-label="Twitter" id="footerTwitter"><img src="../images/icons8-twitter-50.svg" alt="Twitter" style="width:20px;height:20px;"><span></span></a></a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div id="footerQRNaslov"></div>
+    <!-- QR код овде -->
+  </div>
+</footer>
+    <script src="https://unpkg.com/i18next@23.4.6/dist/umd/i18next.min.js"></script>
+    <script>
+function cir2lat(str) {
+    const map = {
+        А:"A", Б:"B", В:"V", Г:"G", Д:"D", Ђ:"Đ", Е:"E", Ж:"Ž", З:"Z", И:"I", Ј:"J", К:"K", Л:"L", Љ:"Lj", М:"M", Н:"N", Њ:"Nj", О:"O", П:"P", Р:"R", С:"S", Т:"T", Ћ:"Ć", У:"U", Ф:"F", Х:"H", Ц:"C", Ч:"Č", Џ:"Dž", Ш:"Š",
+        а:"a", б:"b", в:"v", г:"g", д:"d", ђ:"đ", е:"e", ж:"ž", з:"z", и:"i", ј:"j", к:"k", л:"l", љ:"lj", м:"m", н:"n", њ:"nj", о:"o", п:"p", р:"r", с:"s", т:"t", ћ:"ć", у:"u", ф:"f", х:"h", ц:"c", ч:"č", џ:"dž", ш:"š"
+    };
+    return str.replace(/[\u0400-\u04FF]/g, function(c) { return map[c] || c; });
+}
+
+i18next.init({
+  lng: localStorage.getItem("jezik") || "sr",
+  resources: window.resources
+}, function(err, t) {
+  updateContent();
+});
+
+document.getElementById("lang").addEventListener("change", function() {
+    const lang = this.value;
+    localStorage.setItem("jezik", lang);
+    i18next.changeLanguage(lang, updateContent);
+});
+
+function updateContent() {
+    const t = i18next.t;
+    const lang = i18next.language || "sr";
+    if (document.getElementById("informacijeNaslovTab")) document.getElementById("informacijeNaslovTab").textContent = t('informacijeNaslov');
+    if (document.getElementById("informacijeNaslov")) document.getElementById("informacijeNaslov").textContent = t('informacijeNaslov');
+    if (document.getElementById("navNaslovna")) document.getElementById("navNaslovna").textContent = t('navNaslovna');
+    if (document.getElementById("navInformacije")) document.getElementById("navInformacije").textContent = t('navInformacije');
+    if (document.getElementById("navKontakt")) document.getElementById("navKontakt").textContent = t('navKontakt');
+    if (document.getElementById("navVozniRed")) document.getElementById("navVozniRed").textContent = t('navVozniRed');
+    if (document.getElementById("navGalerija")) document.getElementById("navGalerija").textContent = t('navGalerija');
+    if (document.getElementById("nemaVozova")) document.getElementById("nemaVozova").textContent = t('nemaVozova');
+    if (document.getElementById("pretrazi")) document.getElementById("pretrazi").textContent = t('pretrazi');
+    if (document.getElementById("datum")) document.getElementById("datum").textContent = t('datum');
+    if (document.getElementById("polazak")) document.getElementById("polazak").textContent = t('polazak');
+    if (document.getElementById("dolazak")) document.getElementById("dolazak").textContent = t('dolazak');
+    if (document.getElementById("od")) document.getElementById("od").textContent = t('od');
+    if (document.getElementById("ka")) document.getElementById("ka").textContent = t('ka');
+    if (document.getElementById("prevoznik")) document.getElementById("prevoznik").textContent = t('prevoznik');
+    if (document.getElementById("tipKarte")) document.getElementById("tipKarte").textContent = t('tipKarte');
+    if (document.getElementById("rezervacija")) document.getElementById("rezervacija").textContent = t('rezervacija');
+    if (document.getElementById("placanje")) document.getElementById("placanje").textContent = t('placanje');
+    if (document.getElementById("student")) document.getElementById("student").textContent = t('student');
+    if (document.getElementById("penzioner")) document.getElementById("penzioner").textContent = t('penzioner');
+    if (document.getElementById("cena")) document.getElementById("cena").textContent = t('cena');
+    if (document.getElementById("napomena")) document.getElementById("napomena").textContent = t('napomena');
+    if (document.getElementById("footer")) document.getElementById("footer").innerHTML = t('footer');
+    document.getElementById("footerZvanicniLinkovi").textContent = i18next.t("footerZvanicniLinkovi");
+    document.getElementById("footerLinkZCG").textContent = i18next.t("footerLinkZCG");
+    document.getElementById("footerLinkZICG").textContent = i18next.t("footerLinkZICG");
+    document.getElementById("footerLinkVlada").textContent = i18next.t("footerLinkVlada");
+    document.getElementById("footerDrustveneMreze").textContent = i18next.t("footerDrustveneMreze");
+    document.querySelector("#footerFacebook span").textContent = i18next.t("footerFacebook");
+    document.querySelector("#footerInstagram span").textContent = i18next.t("footerInstagram");
+    document.querySelector("#footerTwitter span").textContent = i18next.t("footerTwitter");
+    document.getElementById("footerQRNaslov").textContent = i18next.t("footerQRNaslov");
+    if (document.getElementById("navOpsteInformacije")) document.getElementById("navOpsteInformacije").textContent = t('navOpsteInformacije');
+            if (document.getElementById("navFAQ")) document.getElementById("navFAQ").textContent = t('navFAQ');
+            if (document.getElementById("navIstorija")) document.getElementById("navIstorija").textContent = t('navIstorija');
+            document.getElementById("footerLinkTOP").textContent = t("footerLinkTOP");
+            document.getElementById("footerLinkJUCKPV").textContent = t("footerLinkJUCKPV");
+            document.getElementById("footerLinkOpština").textContent = t("footerLinkOpština");  
+
+    if (lang === "sr-Latn") {
+        transliteratePage();
+    }
+    const rtlLangs = ['ar', 'fa'];
+    if (rtlLangs.includes(lang)) {
+        document.body.setAttribute('dir', 'rtl');
+    } else {
+        document.body.setAttribute('dir', 'ltr');
+    }
+}
+
+function transliteratePage() {
+    const langSelect = document.getElementById("lang");
+    const langHtml = langSelect.innerHTML;
+    function transliterateNode(node) {
+        if (node.nodeType === 3) {
+            node.nodeValue = cir2lat(node.nodeValue);
+        } else if (node.nodeType === 1 && node.childNodes && node.id !== "lang") {
+            node.childNodes.forEach(transliterateNode);
+        }
+    }
+    document.body.childNodes.forEach(transliterateNode);
+    langSelect.innerHTML = langHtml;
+}
+    </script>
+</div>
+</body>
+</html>

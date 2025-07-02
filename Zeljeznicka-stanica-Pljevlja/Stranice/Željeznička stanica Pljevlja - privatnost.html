@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title id="privatnostNaslov"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../centralni_recnik_dodatni.js"></script>
+    <script src="../centralni_recnik.js"></script>
+    <link rel="stylesheet" href="../privatnost.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../images/site.webmanifest">
+</head>
+<body>
+    <header>
+        <div class="privatnost-wrapper">
+            <h1 id="privatnostNaslov"></h1>
+            <h2 id="privatnostPodnaslov"></h2>
+        </div>
+    </header>
+
+    <main>
+        <p id="privatnostP1"></p>
+        <h2 id="privatnostPrikupljanje"></h2>
+        <p id="privatnostP2"></p>
+        <h2 id="privatnostKorištenje"></h2>
+        <p id="privatnostP3"></p>
+        <h2 id="privatnostDijeljenje"></h2>
+        <p id="privatnostP4"></p>
+        <h2 id="privatnostSigurnost"></h2>
+        <p id="privatnostP5"></p>
+        <h2 id="privatnostVasaPrava"></h2>
+        <p id="privatnostP6"></p>
+        <h2 id="privatnostPromjene"></h2>
+        <p id="privatnostP7"></p>
+        <h2 id="privatnostKontaktirajteNas"></h2>
+        <p id="privatnostP8"></p>
+    </main>
+
+    <footer>
+        <p id="footer"></p>
+    </footer>
+
+    <!-- Učitaj centralni_recnik.js PRE ovoga! -->
+    <script src="../centralni_recnik.js"></script>
+    <script>
+        // Postavi jezik (možeš dinamički menjati)
+        let lang = localStorage.getItem("lang") || "sr"; // podrazumevano srpski
+        const t = resources[lang].translation;
+
+        // Naslovi i podnaslovi
+        document.getElementById("privatnostNaslov").innerText = t.privatnostNaslov || "";
+        document.getElementById("privatnostPodnaslov").innerText = t.privatnostPodnaslov || "";
+
+        // Paragrafi i sekcije
+        document.getElementById("privatnostP1").innerText = t.privatnostP1 || "";
+        document.getElementById("privatnostPrikupljanje").innerText = t.privatnostPrikupljanje || "";
+        document.getElementById("privatnostP2").innerText = t.privatnostP2 || "";
+        document.getElementById("privatnostKorištenje").innerText = t.privatnostKorištenje || "";
+        document.getElementById("privatnostP3").innerText = t.privatnostP3 || "";
+        document.getElementById("privatnostDijeljenje").innerText = t.privatnostDijeljenje || "";
+        document.getElementById("privatnostP4").innerText = t.privatnostP4 || "";
+        document.getElementById("privatnostSigurnost").innerText = t.privatnostSigurnost || "";
+        document.getElementById("privatnostP5").innerText = t.privatnostP5 || "";
+        document.getElementById("privatnostVasaPrava").innerText = t.privatnostVasaPrava || "";
+        document.getElementById("privatnostP6").innerText = t.privatnostP6 || "";
+        document.getElementById("privatnostPromjene").innerText = t.privatnostPromjene || "";
+        document.getElementById("privatnostP7").innerText = t.privatnostP7 || "";
+        document.getElementById("privatnostKontaktirajteNas").innerText = t.privatnostKontaktirajteNas || "";
+        document.getElementById("privatnostP8").innerText = t.privatnostP8 || "";
+
+        // Footer
+        document.getElementById("footer").innerHTML = t.footer || "";
+
+        // Title
+        document.title = t.Pravila_Privatnosti || t.privatnostNaslov || "Правила приватности";
+    </script>
+</body>
+</html>

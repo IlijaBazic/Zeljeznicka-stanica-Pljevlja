@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8" />
+    <title id="naslovTab">Возни ред</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style-cleaned.css" />
+    <!-- <link rel="stylesheet" href="../style.css" /> -->
+     <script src="../centralni_recnik_dodatni.js"></script>
+    <script src="../centralni_recnik.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png" />
+    <link rel="manifest" href="../images/site.webmanifest" />
+</head>
+<body>
+    <div class="site-wrapper">
+    <header>
+        <div class="language-menu">
+        <label for="lang">Језик:</label>
+        <select id="lang">
+            <option value="sr">Српски (ћирилица)</option>
+            <option value="sr-Latn">Srpski (latinica)</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="ru">Русский</option>
+            <option value="fr">Français</option>
+            <option value="it">Italiano</option>
+            <option value="tr">Türkçe</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+            <option value="hi">हिन्दी</option>
+            <option value="fa">فارسی</option>
+            <option value="ar">العربية</option>
+            <option value="vi">Tiếng Việt</option>
+            <option value="pt">Português</option>
+            <option value="sm">Samoan</option>
+            <option value="mi">Māori</option>
+            <option value="sw">Kiswahili</option>
+            <option value="th">ไทย (Thai)</option>
+        </select>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="Željeznička stanica Pljevlja - naslovna.html" id="navNaslovna"></a></li>
+                <li class="dropdown">
+                    <a href="Željeznička stanica Pljevlja - informacije.html" id="navInformacije">Информације</a>
+                    <ul class="dropdown-content">
+                        <li><a href="Željeznička stanica Pljevlja - informacije.html" id="navOpsteInformacije"></a></li>
+                        <li><a href="Željeznička stanica Pljevlja - faq.html" id="navFAQ"></a></li>
+                        <li><a href="Željeznička stanica Pljevlja - istorija.html" id="navIstorija"></a></li>
+                    </ul>
+                <li><a href="Željeznička stanica Pljevlja - kontakt.html" id="navKontakt"></a></li>
+                <li><a href="Željeznička stanica Pljevlja - vozni red.html" id="navVozniRed"></a></li>
+                <li><a href="Željeznička stanica Pljevlja - galerija.html" id="navGalerija"></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 id="naslov"></h1>
+
+    <form id="filterForma" class="vozni-forma">
+  <div class="form-row">
+    <div class="form-group">
+      <label id="lblOd"></label>
+      <input type="text" id="gradOd" list="staniceLista" autocomplete="on" />
+    </div>
+    <button type="button" id="swapBtn" title="Замени полазиште и одредиште" class="swap-btn">
+      <img src="../images/swap-arrows.svg" alt="Swap" style="width:32px;height:32px;">
+    </button>
+    <div class="form-group">
+      <label id="lblKa"></label>
+      <input type="text" id="gradKa" list="staniceLista" autocomplete="on" />
+    </div>
+  </div>
+  <div class="form-row" style="justify-content: center;">
+    <div class="form-group" style="align-items: center; min-width: 180px;">
+      <label id="lblDatum"></label>
+      <input type="date" id="datum" />
+    </div>
+    </div>
+    <button type="submit" id="btnPretrazi"></button>
+  
+</form>
+
+<datalist id="staniceLista">
+  <option value="Пљевља">
+  <option value="Подгорица">
+  <option value="Бар">
+  <!-- додај остале станице -->
+</datalist>
+
+<!-- Порука док није извршена претрага -->
+<div id="porukaPretrage" style="text-align:center; margin:2em 0; color:#004D4D; font-size:1.1em;">
+  
+</div>
+
+<!-- Табела је сакривена док се не изврши претрага -->
+<table id="vozniRed" style="display:none;">
+  <thead>
+    <tr>
+      <th id="thDatum"></th>
+      <th id="thPolazak"></th>
+      <th id="thOd"></th>
+      <th style="background: transparent;"></th>
+      <th id="thKa"></th>
+      <th id="thCena"></th>
+      <th id="thDetalji"></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+    <!-- Modal za plaćanje -->
+    <div id="paymentModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="closeModal" class="closeBtn" style="cursor: pointer; box-shadow: 2px 2px 2px 2px; position: top right"></span>
+            <div id="modalDetails"></div>
+            <form id="uplatnaForma" novalidate>
+                <label for="ime" id="lblIme"></label>
+                <input type="text" id="ime" name="ime" required pattern="^[A-Za-zА-Яа-яЉЊЂЋЏŠĐČĆŽšđčćž\s\-]{2,}$" />
+                <label for="prezime" id="lblPrezime"></label>
+                <input type="text" id="prezime" name="prezime" required pattern="^[A-Za-zА-Яа-яЉЊЂЋЏŠĐČĆŽšđčćž\s\-]{2,}$" />
+                <label for="email" id="lblEmail"></label>
+                <input type="email" id="email" name="email" required />
+            </form>
+                <form id="placanjeOnline" required>
+                <div class="radio-option">
+                    <input type="radio" name="nacinPlacanja" id="placanje_kartica" value="placanje_kartica">
+                    <label class="payment-method" for="placanje_kartica"></label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="nacinPlacanja" id="placanje_PayPal" value="placanje_PayPal">
+                    <label class="payment-method" for="placanje_PayPal"></label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="nacinPlacanja" id="placanjeStripe" value="placanjeStripe">
+                    <label class="payment-method" for="placanjeStripe"></label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" name="nacinPlacanja" id="placanje_gotovina" value="placanje_gotovina">
+                    <label class="payment-method" for="placanje_gotovina"></label>
+                </div>
+            </form>
+            <button id="Kupi_kartu"  type="button">Купи карту</button>
+        </div>
+    </div>
+    <div id="detaljiModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="closeDetaljiModal" class="closeBtn" style="cursor:pointer;"></span>
+    <div id="modalDetaljiSadrzaj"></div>
+    <button id="otvoriModalPlacanja" type="button" style="margin-top:1em;">Купи карту</button>
+  </div>
+</div>
+    <footer class="footer-grid">
+  <div class="footer-col">
+    <h4 id="footerZvanicniLinkovi"></h4>
+    <ul>
+      <li><a href="https://www.zcg-prevoz.me/" target="_blank" rel="noopener" id="footerLinkZCG"></a></a></li>
+      <li><a href="https://www.zicg.me/" target="_blank" rel="noopener" id="footerLinkZICG"></a></a></li>
+      <li><a href="https://www.gov.me/" target="_blank" rel="noopener" id="footerLinkVlada"></a></a></li>
+      <li><a href="https://www.pljevlja.co.me/" target="_blank"id="footerLinkOpština"></a></a></li>
+      <li><a href="https://www.turizampljevlja.me/" target="_blank" id="footerLinkTOP"></a>  </a></li>
+      <li><a href="https://www.juckpv.me/" target="_blank" id="footerLinkJUCKPV"></a> </a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h4 id="footerDrustveneMreze"></h4>
+    <ul class="social-links">
+      <li><a href="#" aria-label="Facebook" id="footerFacebook"><img src="../images/icons8-facebook-50.svg" alt="Facebook" style="width:20px;height:20px;"><span></span></a></a></li>
+      <li><a href="#" aria-label="Instagram" id="footerInstagram"><img src="../images/icons8-instagram-50.svg" alt="Instagram" style="width:20px;height:20px;"><span></span></a></a></li>
+      <li><a href="#" aria-label="Twitter" id="footerTwitter"><img src="../images/icons8-twitter-50.svg" alt="Twitter" style="width:20px;height:20px;"><span></span></a></a></li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div id="footerQRNaslov"></div>
+    <!-- QR код овде -->
+  </div>
+</footer>
+    <script src="https://unpkg.com/i18next@23.4.6/dist/umd/i18next.min.js"></script>
+    <script>
+        // --------- TRANSLITERACIJA ---------
+        function cir2lat(str) {
+            const map = {
+                А: "A", Б: "B", В: "V", Г: "G", Д: "D", Ђ: "Đ", Е: "E", Ж: "Ž", З: "Z", И: "I", Ј: "J", К: "K", Л: "L", Љ: "Lj", М: "M", Н: "N", Њ: "Nj", О: "O", П: "P", Р: "R", С: "S", Т: "T", Ћ: "Ć", У: "U", Ф: "F", Х: "H", Ц: "C", Ч: "Č", Џ: "Dž", Ш: "Š", 
+                а: "a", б: "b", в: "v", г: "g", д: "d", ђ: "đ", е: "e", ж: "ž", з: "z", и: "i", ј: "j", к: "k", л: "l", љ: "lj", м: "m", н: "n", њ: "nj", о: "o", п: "p", р: "r", с: "s", т: "t", ћ: "ć", у: "u", ф: "f", х: "h", ц: "c", ч: "č", џ: "dž", ш: "š", 
+            };
+            return str.replace(/[\u0400-\u04FF]/g, function (c) {
+                return map[c] || c;
+            });
+        }
+        function transliterateNode(node) {
+            if (node.nodeType === 3) {
+                node.nodeValue = cir2lat(node.nodeValue);
+            } else if (node.nodeType === 1 && node.childNodes) {
+                node.childNodes.forEach(transliterateNode);
+            }
+        }
+        function transliteratePage() {
+            transliterateNode(document.body);
+        }
+
+        // --------- I18NEXT INICIJALIZACIJA ---------
+        i18next.init(
+            {
+                lng: localStorage.getItem("jezik") || "sr",
+                resources: window.resources,
+            },
+            function (err, t) {
+                updateContent();
+                ucitajVozniRed();
+            }
+        );
+
+        // --------- PROMENA JEZIKA ---------
+        document.getElementById("lang").addEventListener("change", function () {
+            const lang = this.value;
+            localStorage.setItem("jezik", lang);
+            i18next.changeLanguage(lang, function () {
+                updateContent();
+                ucitajVozniRed();
+            });
+        });
+
+        function updateContent() {
+            const t = i18next.t;
+            const lang = i18next.language || "sr";
+            // Навигација и наслови
+            document.getElementById("navNaslovna").textContent = t("navNaslovna");
+            document.getElementById("navInformacije").textContent = t("navInformacije");
+            document.getElementById("navKontakt").textContent = t("navKontakt");
+            document.getElementById("navVozniRed").textContent = t("navVozniRed");
+            document.getElementById("navGalerija").textContent = t("navGalerija");
+            document.getElementById("naslov").textContent = t("naslov");
+            document.getElementById("lblOd").textContent = t("lblOd");
+            document.getElementById("lblKa").textContent = t("lblKa");
+            document.getElementById("lblDatum").textContent = t("lblDatum");
+            document.getElementById("btnPretrazi").textContent = t("btnPretrazi");
+            // Остави само ове th кључеве који су у табели
+            document.getElementById("thDatum").textContent = t("thDatum");
+            document.getElementById("thPolazak").textContent = t("thPolazak");
+            document.getElementById("thOd").textContent = t("thOd");
+            document.getElementById("thKa").textContent = t("thKa");
+            document.getElementById("thCena").textContent = t("thCena");
+            document.getElementById("thDetalji").textContent = t("thDetalji");
+            // Остале кључеве закоментариши или уклони ако их не користиш у табели/форми
+            document.getElementById("lblIme").textContent = t("lblIme");
+            document.getElementById("lblPrezime").textContent = t("lblPrezime");
+            document.getElementById("lblEmail").textContent = t("lblEmail");
+            // document.getElementById("thDolazak").textContent = t("thDolazak");
+            // document.getElementById("thPrevoznik").textContent = t("thPrevoznik");
+            // document.getElementById("thTipKarte").textContent = t("thTipKarte");
+            // document.getElementById("thRezervacija").textContent = t("thRezervacija");
+            // document.getElementById("thPlacanje").textContent = t("thPlacanje");
+            // document.getElementById("thStudent").textContent = t("thStudent");
+            // document.getElementById("thPenzioner").textContent = t("thPenzioner");
+            // document.getElementById("thNapomena").textContent = t("thNapomena");
+            // document.getElementById("thSlobodnaMjesta").textContent = t("thSlobodnaMjesta");
+            // document.getElementById("naslovTab").textContent = t("naslovTab");
+            document.querySelector('label[for="placanje_kartica"]').textContent = t("placanje_kartica");
+            document.querySelector('label[for="placanje_PayPal"]').textContent = t("placanje_PayPal");
+            document.querySelector('label[for="placanjeStripe"]').textContent = t("placanjeStripe");
+            document.querySelector('label[for="placanje_gotovina"]').textContent = t("placanje_gotovina");
+            document.getElementById("Kupi_kartu").textContent = t("Kupi_kartu");
+            document.getElementById("closeModal").textContent = t("closeModal");
+            document.getElementById("footerZvanicniLinkovi").textContent = t("footerZvanicniLinkovi");
+            document.getElementById("footerDrustveneMreze").textContent = t("footerDrustveneMreze");
+            document.getElementById("footerQRNaslov").textContent = t("footerQRNaslov");
+            document.getElementById("footerLinkZCG").textContent = t("footerLinkZCG");
+            document.getElementById("footerLinkZICG").textContent = t("footerLinkZICG");
+            document.getElementById("footerLinkVlada").textContent = t("footerLinkVlada");
+            document.querySelector("#footerFacebook span").textContent = t("footerFacebook");
+            document.querySelector("#footerInstagram span").textContent = t("footerInstagram");
+            document.querySelector("#footerTwitter span").textContent = t("footerTwitter");
+            document.getElementById("footerLinkTOP").textContent = t("footerLinkTOP");
+            document.getElementById("footerLinkJUCKPV").textContent = t("footerLinkJUCKPV");
+            document.getElementById("footerLinkOpština").textContent = t("footerLinkOpština");
+            document.getElementById("navOpsteInformacije").textContent = t("navOpsteInformacije");
+            document.getElementById("navFAQ").textContent = t("navFAQ");
+            document.getElementById("navIstorija").textContent = t("navIstorija");
+            // RTL/LTR логика
+            const rtlLangs = ["ar", "fa"];
+            if (rtlLangs.includes(lang)) {
+                document.body.setAttribute("dir", "rtl");
+            } else {
+                document.body.setAttribute("dir", "ltr");
+            }
+
+            // Транслитерација само за sr-Latn
+            if (lang === "sr-Latn") {
+                transliteratePage();
+            }
+        }
+
+        // --------- UCITAVANJE VOZNOG REDA ---------
+        function ucitajVozniRed(params = "") {
+            let lang = i18next.language || "sr";
+            let url = "http://127.0.0.1:5000/api/vozni_red?lang=" + lang;
+            if (params) {
+                if (params.startsWith("?")) {
+                    params = params.replace("?", "&");
+                }
+                url += params;
+            }
+
+            fetch(url)
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`HTTP error status ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then((data) => {
+                    let tbody = document.querySelector("#vozniRed tbody");
+                     
+                    tbody.innerHTML = "";
+                    const nizRedova = Object.values(data);
+                    nizRedova.forEach((row)  => {
+                        tbody.innerHTML += `<tr class="red-voznje" data-id="${row.id}" style="cursor: pointer;">
+                            <td>${row.datum || ""}</td>
+                            <td>${row.vrijeme_polaska || ""}</td>
+                            <td>${row.grad_od || ""}</td>
+                            <td style="text-align:center;">
+                                <span style="font-size:1.5em;vertical-align:middle;">&#8594;</span>
+                                <br>
+                                <span style="font-size:0.95em;color:#888;">${row.trajanje_voznje || "-"}</span>
+                            </td>
+                            <td>${row.grad_ka || ""}</td>
+                            <td>${row.cena || ""}</td>
+                            <td><button class="detalji-btn" data-id="${row.id}">${i18next.t("thDetalji")}</button></td>
+                        </tr>
+                        <tr class="detalji-expand" id="detalji-${row.id}" style="display:none;">
+                        <td colspan="7"></td>
+                        </tr>`;
+                    });
+                    dodajKlikNaDetalje();
+                    dodajKlikNaRedove();
+                })
+                .catch((error) => {
+                    console.error("Error loading timetable:", error.message || "Unknown error occurred");
+                    let tbody = document.querySelector("#vozniRed tbody");
+                    if (tbody) {
+                        tbody.innerHTML = '<tr><td colspan="6">Грешка при учитавању података. Молимо покушајте поново.</td></tr>';
+                    }
+                });
+        }
+        function dodajKlikNaRedove() {
+    document.querySelectorAll("#vozniRed tbody tr").forEach((tr) => {
+        tr.addEventListener("click", function (e) {
+            // Ако је кликнуто на дугме "Детаљи", не ради ништа (већ ради другај слушалац)
+            if (e.target.classList.contains("detalji-btn")) return;
+            // Отвори модал за куповину карте
+            document.getElementById("Kupi_kartu").dataset.polazakId = this.dataset.id;
+            document.getElementById("paymentModal").style.display = "block";
+            document.body.style.overflow = "hidden";
+        });
+    });
+}
+document.getElementById("swapBtn").onclick = function() {
+    const od = document.getElementById("gradOd");
+    const ka = document.getElementById("gradKa");
+    const temp = od.value;
+    od.value = ka.value;
+    ka.value = temp;
+};
+        // --------- DETALJI ДУГМЕ ---------
+        function dodajKlikNaDetalje() {
+            document.querySelectorAll(".detalji-btn").forEach((btn) => {
+                btn.addEventListener("click", function (e) {
+                    e.stopPropagation();
+                    prikaziDetaljeModal(this.dataset.id);
+                });
+            });
+        }
+
+        // --------- PRIKAZ MODALA SA DETALJIMA ---------
+        function prikaziDetaljeModal(polazakId) {
+            // Сакриј све остале детаљ-редове
+            document.querySelectorAll('.detalji-expand').forEach(tr => tr.style.display = 'none');
+            fetch(`http://127.0.0.1:5000/api/vozni_red/${polazakId}`)
+                .then((response) => {
+                    if (!response.ok) throw new Error("Полазак није пронађен");
+                    return response.json();
+                })
+                .then((polazak) => {
+                    const detaljiTr = document.getElementById(`detalji-${polazakId}`);
+                    detaljiTr.style.display = '';
+                    detaljiTr.querySelector('td').innerHTML = `
+                <div class="detalji-kartica">
+                    <strong>Датум:</strong> ${polazak.datum}<br>
+                    <strong>Полазак:</strong> ${polazak.vrijeme_polaska}<br>
+                    <strong>Слободна места:</strong> ${polazak.slobodna_mjesta}<br>
+                    <strong>Напомена:</strong> ${polazak.napomena || "-"}<br>
+                    <strong>Превозник:</strong> ${polazak.prevoznik || "-"}<br>
+                    <strong>Тип карте:</strong> ${polazak.tip_karte || "-"}<br>
+                    <strong>Резервација:</strong> ${polazak.rezervacija || "-"}<br>
+                    <strong>Плаћање:</strong> ${polazak.placanje_online || "-"}<br>
+                    <strong>Студент:</strong> ${polazak.student || "-"}<br>
+                    <strong>Пензионер:</strong> ${polazak.penzioner || "-"}<br>
+                    <strong>Колосјек:</strong> ${polazak.kolosjek || "-"}<br>
+                    <!-- Овде можеш додати Google Maps iframe или табелу станица -->
+                    <div style="margin-top:1em;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=..." 
+                            width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <button id="otvoriModalPlacanja" data-polazak-id="${polazakId}" style="margin-top:1em;">Купи карту</button>
+                </div>
+            `;
+            detaljiTr.querySelector('#otvoriModalPlacanja').onclick = function() {
+                document.getElementById("Kupi_kartu").dataset.polazakId = polazakId;
+                document.getElementById("paymentModal").style.display = "block";
+                document.body.style.overflow = "hidden";
+            };
+                })
+                .catch((err) => {
+                    alert("Детаљи за овај полазак нису доступни.");
+                });
+        }
+
+        // Затварање детаљ модала
+        document.getElementById("closeDetaljiModal").onclick = function() {
+            document.getElementById("detaljiModal").style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+        window.addEventListener("click", function(event) {
+            if (event.target === document.getElementById("detaljiModal")) {
+                document.getElementById("detaljiModal").style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Прелазак на модал за плаћање
+        document.getElementById("otvoriModalPlacanja").onclick = function() {
+            // Сачувај ID у дугмету купи карту у paymentModal-у
+            document.getElementById("Kupi_kartu").dataset.polazakId = this.dataset.polazakId;
+            document.getElementById("detaljiModal").style.display = "none";
+            document.getElementById("paymentModal").style.display = "block";
+        };
+
+        // --------- MODAL ---------
+        const modal = document.getElementById("paymentModal");
+        const closeModalBtn = document.getElementById("closeModal");
+
+        function otvoriModal() {
+            modal.style.display = "block";
+            document.body.style.overflow = "hidden";  // спречи скрол позадине
+        }
+        function zatvoriModal() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";  // врати нормалан скрол
+        }
+        closeModalBtn.addEventListener("click", zatvoriModal);
+
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                zatvoriModal();
+            }
+        });
+
+        // --------- KUPI KARTU ---------
+        document.getElementById("Kupi_kartu").addEventListener("click", function () {
+            const polazakId = this.dataset.polazakId;
+            if (!polazakId) {
+                alert(i18next.t("nijeIzabranPolazak"));
+                return;
+            }
+            alert(i18next.t("kupovinaNijeDostupna"));
+            zatvoriModal();
+        });
+
+        // --------- FILTRIRANJE PRETRAGE ---------
+        document.getElementById("filterForma").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const gradOd = document.getElementById("gradOd").value;
+            const gradKa = document.getElementById("gradKa").value;
+            const datum = document.getElementById("datum").value;
+            let queryParams = [];
+
+            if (gradOd) queryParams.push(`grad_od=${encodeURIComponent(gradOd)}`);
+            if (gradKa) queryParams.push(`grad_ka=${encodeURIComponent(gradKa)}`);
+            if (datum) queryParams.push(`datum=${encodeURIComponent(datum)}`);
+
+            const params = queryParams.length ? "?" + queryParams.join("&") : "";
+
+            // Сакриј поруку, прикажи табелу
+            document.getElementById("porukaPretrage").style.display = "none";
+            document.getElementById("vozniRed").style.display = "";
+
+            ucitajVozniRed(params);
+        });
+
+        // --------- POČETNA ИНИЦИЈАЛИЗАЦИЈА ---------
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("vozniRed").style.display = "none";
+            document.getElementById("porukaPretrage").style.display = "";
+            const savedLang = localStorage.getItem("jezik");
+            if (savedLang) {
+                document.getElementById("lang").value = savedLang;
+                i18next.changeLanguage(savedLang, updateContent);
+            }
+            // Učitavanje voznog reda se pokreće iz callback-a i18next-a
+        });
+    </script>
+</div>
+</body>
+</html>
