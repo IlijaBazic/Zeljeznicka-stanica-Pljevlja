@@ -31,7 +31,8 @@ Za naprednije funkcionalnosti (API za vozni red), potrebno je pokrenuti backend 
 ## Autor
 
 Илија Н. Базић/Ilija N. Bazić
-[GitHub профил или контакт]
+GitHub профил: IlijaBazic;
+Gmail: ilajdza2@gmail.com
 
 ## Licenca
 
