@@ -26,12 +26,12 @@ Za naprednije funkcionalnosti (API za vozni red), potrebno je pokrenuti backend 
 
 ## Demo
 
-https://IlijaBazic.github.io/zeljeznicka-stanica-pljevlja/
+Demo će biti dostupan na: [https://IlijaBazic.github.io/zeljeznicka-stanica-pljevlja/]
 
 ## Autor
 
 Илија Н. Базић/Ilija N. Bazić
-GitHub профил: IlijaBazic;
+GitHub профил: IlijaBazic; [https://github.com/IlijaBazic]
 Gmail: ilajdza2@gmail.com
 
 ## Licenca
